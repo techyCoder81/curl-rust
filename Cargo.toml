@@ -17,7 +17,7 @@ travis-ci = { repository = "alexcrichton/curl-rust" }
 appveyor = { repository = "alexcrichton/curl-rust" }
 
 [dependencies]
-libc = "0.2.42"
+libc-nnsdk = { git = "https://github.com/ultimate-research/lib-nnsdk" }
 curl-sys = { path = "curl-sys", version = "0.4.53", default-features = false }
 socket2 = "0.4.0"
 

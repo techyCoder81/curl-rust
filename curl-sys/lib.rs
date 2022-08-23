@@ -14,6 +14,13 @@ extern crate rustls_ffi;
 use libc::c_ulong;
 use libc::{c_char, c_double, c_int, c_long, c_short, c_uint, c_void, size_t, time_t};
 
+#[repr(C)]
+pub struct fd_set {
+    fds_bits: [libc::c_ulong; 1024 / 8]
+}
+
+pub const CURL_SOCKET_BAD: curl_socket_t = -1;
+
 #[cfg(unix)]
 pub use libc::fd_set;
 #[cfg(windows)]
@@ -44,6 +51,9 @@ pub const CURL_SOCKET_BAD: curl_socket_t = -1;
 pub type curl_socket_t = libc::c_uint;
 #[cfg(all(windows, target_pointer_width = "64"))]
 pub type curl_socket_t = u64;
+#[cfg(all(target_os = "switch"))]
+pub type curl_socket_t = i32;
+
 #[cfg(windows)]
 pub const CURL_SOCKET_BAD: curl_socket_t = !0;
 
